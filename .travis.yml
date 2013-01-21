@@ -4,8 +4,9 @@ php:
   - 5.3
 
 before_install:
+  - git clone git@github.com:sonsuzdongu/muhafiz.git /tmp/muhafiz
   - pyrus install pear/PHP_CodeSniffer
   - phpenv rehash
+  - git config muhafiz.bootstrap-file /tmp/muhafiz/src/bootstrap.php
 
-script:
-  - false
+script: /tmp/muhafiz/git-hooks/pre-commit
