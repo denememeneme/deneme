@@ -10,4 +10,4 @@ before_install:
   - phpenv rehash
 
 script:
-  - output=false
+  - output=0
