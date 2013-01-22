@@ -4,12 +4,16 @@ php:
   - 5.3
 
 before_install:
-  - git clone git://github.com/sonsuzdongu/muhafiz.git /tmp/muhafiz
-  - pyrus install pear/PHP_CodeSniffer
+  - wget -c https://raw.github.com/sonsuzdongu/muhafiz/master/sonsuzdongu.xml -O /tmp/sonsuzdongu.xml #download standards file
+  - git clone git://github.com/sonsuzdongu/muhafiz.git /tmp/muhafiz # clone muhafiz
+  - git config muhafiz.bootstrap-file /tmp/muhafiz/src/bootstrap.php # set bootstrap
+  - git config muhafiz.active-runners 'php, phpcs' #set active runners
+  - git config muhafiz.runners.phpcs.standard /tmp/sonsuzdongu.xml  # set standards file for php-cs
+  - cp /tmp/muhafiz/git-hooks/pre-commit .git/hooks/pre-commit  # copy pre-commit hook
+  - pyrus install pear/PHP_CodeSniffer # install pear
   - phpenv rehash
-  - git config muhafiz.bootstrap-file /tmp/muhafiz/src/bootstrap.php
-  - git config muhafiz.active-runners 'php, phpcs'
-  - git config muhafiz.runners.phpcs.standard `pwd`/sonsuzdongu.xml 
-  - cp /tmp/muhafiz/git-hooks/pre-commit .git/hooks/pre-commit 
 
-script: .git/hooks/pre-commit
+script: 
+  - echo $TRAVIS_COMMIT_RANGE
+  - echo $TRAVIS_COMMIT
+  - .git/hooks/pre-commit
