@@ -8,5 +8,7 @@ before_install:
   - pyrus install pear/PHP_CodeSniffer
   - phpenv rehash
   - git config muhafiz.bootstrap-file /tmp/muhafiz/src/bootstrap.php
+  - git config muhafiz.active-runners 'php, phpcs'
+  - git config muhafiz.runners.phpcs.standard `pwd`/sonsuzdongu.xml 
 
 script: /tmp/muhafiz/git-hooks/pre-commit
