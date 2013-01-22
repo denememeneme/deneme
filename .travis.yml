@@ -10,5 +10,6 @@ before_install:
   - git config muhafiz.bootstrap-file /tmp/muhafiz/src/bootstrap.php
   - git config muhafiz.active-runners 'php, phpcs'
   - git config muhafiz.runners.phpcs.standard `pwd`/sonsuzdongu.xml 
+  - cp /tmp/muhafiz/git-hooks/pre-commit .git/hooks/pre-commit 
 
-script: /tmp/muhafiz/git-hooks/pre-commit
+script: .git/hooks/pre-commit
